@@ -40,8 +40,6 @@ export default function MyWalletContainer () {
         }
       }
 
-        
-
     return (
         <div>
         <h1>My Wallet</h1>

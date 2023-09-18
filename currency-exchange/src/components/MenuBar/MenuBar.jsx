@@ -19,6 +19,9 @@ export default function MenuBar() {
                 <li>
                     <Link to="/mywallet">My Wallet</Link>
                 </li>
+                <li>
+                    <Link to="/chartpage">Historical Charts</Link>
+                </li>
             </ul>
             )}
         </div>
