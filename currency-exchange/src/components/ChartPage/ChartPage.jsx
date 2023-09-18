@@ -3,14 +3,14 @@ import Chart from "react-apexcharts"
 
 export default function ChartPage () {
 
-    const [startDate, setStartDate] = useState("2020-01-04")
-    const [endDate, setEndDate] = useState("2020-01-29")
+    const [startDate, setStartDate] = useState("")
+    const [endDate, setEndDate] = useState("")
     const [baseCurrency,setBaseCurrency] = useState("EUR")
     const [quoteCurrency, setQuoteCurrency] = useState("USD")
     const [chartData, setChartData] = useState([])
 
 
-    useEffect(() => {
+    const handleSubmit = () => {
         const fetchCurrencies = async () => {
           const response = await fetch(
             `https://api.frankfurter.app/${startDate}..${endDate}?from=${baseCurrency}&to=${quoteCurrency}`
@@ -47,12 +47,33 @@ export default function ChartPage () {
           setEndDate(data.end_date)
         };
         fetchCurrencies();
-      }, [startDate, endDate, baseCurrency, quoteCurrency]);
+      };
+
+      useEffect(() => {
+        handleSubmit();
+      },[baseCurrency, quoteCurrency]);
+
+      const handleStartDateChange = (event) => {
+        setStartDate(event.target.value);
+      };
+
+      const handleEndDateChange = (event) => {
+        setEndDate(event.target.value);
+      };
+
+      const handleBaseCurrencyChange = (event) => {
+        setBaseCurrency(event.target.value);
+      };
+
+      const handleQuoteCurrencyChange = (event) => {
+        setQuoteCurrency(event.target.value);
+      };
 
   
     return (
         <div>
         <h1>Historical Exchange Rate Chart</h1>
+        <h3>{baseCurrency} to {quoteCurrency}</h3>
         <div>
             {chartData && chartData?.series &&(
                 <Chart
@@ -64,6 +85,31 @@ export default function ChartPage () {
                 />
             )}
         </div>
+        <label>Start Date:</label>
+        <input
+            type="date"
+            onChange={handleStartDateChange}
+        />
+        <label>End Date:</label>
+        <input
+            type="date"
+            onChange={handleEndDateChange}
+        />
+        <button onClick={handleSubmit}>Change Dates</button>
+        <br/>
+        <label>Base Currency:</label>
+        <input
+            type="text"
+            onChange={handleBaseCurrencyChange}
+            value={baseCurrency}
+        />
+        <label>Quote Currency:</label>
+        <input
+            type="text"
+            onChange={handleQuoteCurrencyChange}
+            value={quoteCurrency}
+        />
+        <button onClick={handleSubmit}>Change Currencies</button>
     </div>
     )
 }
