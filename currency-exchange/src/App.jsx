@@ -3,6 +3,7 @@ import './App.css'
 import { Route, Routes } from 'react-router-dom';
 import ConverterMainPage from './components/ConverterMainPage/ConverterMainPage';
 import MenuBar from './components/MenuBar/MenuBar';
+import MyWalletContainer from './components/MyWallet/MyWalletContainer';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/mainpage" element={<ConverterMainPage />}></Route>
+            <Route path="/mywallet" element={<MyWalletContainer />}></Route>
           </Routes>
         </div>
       </section>

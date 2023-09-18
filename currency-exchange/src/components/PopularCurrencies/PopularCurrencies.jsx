@@ -42,7 +42,7 @@ export default function PopularCurrencies ({ currencies}) {
             <h2>Popular Currencies</h2>
             <div>Base Currency
               <select
-                value={newCurrency}
+                value={basePopularCurrency}
                 onChange={(event) => setBasePopularCurrency(event.target.value)}
                 >
                   <option value={basePopularCurrency}>{basePopularCurrency}</option>

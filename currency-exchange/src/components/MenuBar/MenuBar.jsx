@@ -13,8 +13,11 @@ export default function MenuBar() {
             <h3 onClick = {toggleMenu}>Menu</h3>
             {showMenu && (
                 <ul>
-                <li className="dropdownitem">
+                <li>
                     <Link to="/mainpage">Main Page</Link>
+                </li>
+                <li>
+                    <Link to="/mywallet">My Wallet</Link>
                 </li>
             </ul>
             )}
