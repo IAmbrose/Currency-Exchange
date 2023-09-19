@@ -1,20 +1,22 @@
 import { useState } from "react";
 
-export default function MyCurrencyCard ({ currency }) {
-    const [balance, setBalance] = useState(0)
+export default function MyCurrencyCard ({ currency, exchangeRates, balance, setBalance, baseCurrency }) {
     const [depositAmount, setDepositAmount] = useState("")
     const [spendAmount, setSpendAmount] = useState("")
+    const baseCurrencyBalance = balance / ((exchangeRates[currency] || 1))
 
     function handleDeposit() {
         if (depositAmount > 0) {
-            setBalance(balance + parseFloat(depositAmount));
+            const newBalance = balance + parseFloat(depositAmount)
+            setBalance(newBalance);
             setDepositAmount("");
         }
     }
 
     function handleSpend() {
         if(spendAmount > 0 && spendAmount <= balance){
-            setBalance(balance - parseFloat(spendAmount));
+            const newBalance = balance - parseFloat(spendAmount)
+            setBalance(newBalance);
             setSpendAmount("");
         }
     }
@@ -23,7 +25,10 @@ export default function MyCurrencyCard ({ currency }) {
     return (
         <div className="currency-card">
             <h3>{currency}</h3>
-                <p>${balance}</p>
+            <p>
+                {currency} Balance: ${balance.toFixed(2)} | {baseCurrency} Balance: $
+                {baseCurrencyBalance.toFixed(2)}
+            </p>
                 <input
                     type="number"
                     placeholder="Deposit Amount"

@@ -8,6 +8,8 @@ export default function MyWalletContainer () {
     const [selectedCurrency, setSelectedCurrency] = useState(["USD"])
     const [newCurrency, setNewCurrency] = useState("")
     const [exchangeRates, setExchangeRates] = useState([]);
+    const [balances, setBalances] = useState({});
+    const [totalValue, setTotalValue] = useState(0);
     
     useEffect(() => {
         const fetchCurrencies = async () => {
@@ -40,10 +42,23 @@ export default function MyWalletContainer () {
         }
       }
 
+      useEffect(() => {
+        let total = 0;
+        selectedCurrency.forEach((currency) => {
+          if (balances[currency] && exchangeRates[currency]) {
+            total += balances[currency] / exchangeRates[currency];
+          }
+        });
+        setTotalValue(total);
+      }, [selectedCurrency, balances, exchangeRates]);
+
+
+
     return (
         <div>
         <h1>My Wallet</h1>
-        <h3>Base Currency - {baseCurrency}</h3>
+        <h2>Base Currency - {baseCurrency}</h2>
+        <h4>Total Value in {baseCurrency}: ${totalValue.toFixed(2)}</h4>
         <select
             value={newCurrency}
             onChange={(event) => setNewCurrency(event.target.value)}
@@ -59,8 +74,14 @@ export default function MyWalletContainer () {
         <div className="wallet-container">
             {selectedCurrency.map((currency) => (
                 <MyCurrencyCard
-                 key = {currency}
-                 currency = {currency}
+                  key = {currency}
+                  currency = {currency}
+                  exchangeRates={exchangeRates}
+                  balance={balances[currency] || 0}
+                  setBalance={(newBalance) =>
+                    setBalances({ ...balances, [currency]: newBalance })
+                  }
+                  baseCurrency={baseCurrency}
                  />
             ))}
         </div>
