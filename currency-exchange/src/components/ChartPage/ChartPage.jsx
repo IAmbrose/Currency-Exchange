@@ -2,13 +2,24 @@ import { useEffect, useState } from "react";
 import Chart from "react-apexcharts"
 
 export default function ChartPage () {
-
+    const [currencies, setCurrencies] = useState([])
     const [startDate, setStartDate] = useState("2022-10-14")
     const [endDate, setEndDate] = useState("2022-11-14")
     const [baseCurrency,setBaseCurrency] = useState("EUR")
     const [quoteCurrency, setQuoteCurrency] = useState("USD")
     const [chartData, setChartData] = useState([])
 
+
+    useEffect(() => {
+      const fetchCurrencies = async () => {
+        const response = await fetch(
+          `https://api.frankfurter.app/latest`
+        );
+        const data = await response.json();
+        setCurrencies([data.base, ...Object.keys(data.rates)]);
+      };
+      fetchCurrencies();
+    }, []);
 
     const handleSubmit = () => {
         const fetchCurrencies = async () => {
@@ -98,18 +109,29 @@ export default function ChartPage () {
         <button onClick={handleSubmit}>Change Dates</button>
         <br/>
         <label>Base Currency:</label>
-        <input
-            type="text"
-            onChange={handleBaseCurrencyChange}
-            value={baseCurrency}
-        />
+        <select
+                value={baseCurrency}
+                onChange={handleBaseCurrencyChange}
+                >
+                  <option value={baseCurrency}>{baseCurrency}</option>
+                  {currencies.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
         <label>Quote Currency:</label>
-        <input
-            type="text"
-            onChange={handleQuoteCurrencyChange}
-            value={quoteCurrency}
-        />
-        <button onClick={handleSubmit}>Change Currencies</button>
+        <select
+                value={quoteCurrency}
+                onChange={handleQuoteCurrencyChange}
+                >
+                  <option value={quoteCurrency}>{quoteCurrency}</option>
+                  {currencies.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
     </div>
     )
 }

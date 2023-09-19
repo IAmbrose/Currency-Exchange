@@ -9,7 +9,7 @@ export default function MenuBar() {
     }
 
     return (
-        <div className="menu-container">
+        <div className="menu-container text-red-300">
             <h3 onClick = {toggleMenu}>Menu</h3>
             {showMenu && (
                 <ul>
