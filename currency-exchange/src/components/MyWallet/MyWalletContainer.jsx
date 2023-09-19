@@ -4,8 +4,8 @@ import MyCurrencyCard from "./MyCurrencyCard";
 
 export default function MyWalletContainer () {
     const [currencies, setCurrencies] = useState([])
-    const [baseCurrency, setBaseCurrency] = useState("EUR")
-    const [selectedCurrency, setSelectedCurrency] = useState(["USD"])
+    const [baseCurrency, setBaseCurrency] = useState("")
+    const [selectedCurrency, setSelectedCurrency] = useState([])
     const [newCurrency, setNewCurrency] = useState("")
     const [exchangeRates, setExchangeRates] = useState([]);
     const [balances, setBalances] = useState({});
@@ -24,15 +24,17 @@ export default function MyWalletContainer () {
       }, []);
 
       useEffect(() => {
-        const fetchExchangeRates = async () => {
-          const response = await fetch(
-            `https://api.frankfurter.app/latest?from=${baseCurrency}&to=${selectedCurrency}`
-          );
-          const data = await response.json();
-          setExchangeRates(data.rates);
+        if (baseCurrency && selectedCurrency.length > 0) {
+          const fetchExchangeRates = async () => {
+            const response = await fetch(
+              `https://api.frankfurter.app/latest?from=${baseCurrency}&to=${selectedCurrency}`
+            );
+            const data = await response.json();
+            setExchangeRates(data.rates);
+            }
+          fetchExchangeRates();
           }
-        fetchExchangeRates();
-      }, [baseCurrency, selectedCurrency]);
+        }, [baseCurrency, selectedCurrency]);
 
 
       const handleAddCurrency = () => {
@@ -45,7 +47,7 @@ export default function MyWalletContainer () {
       useEffect(() => {
         let total = 0;
         selectedCurrency.forEach((currency) => {
-          if (balances[currency] && exchangeRates[currency]) {
+          if (balances[currency] !== undefined && exchangeRates[currency] !== undefined) {
             total += balances[currency] / exchangeRates[currency];
           } //dont need to use useEffect
         });

@@ -11,6 +11,7 @@ export default function PopularCurrencies ({ currencies}) {
 
 
     useEffect(() => {
+      if(basePopularCurrency && popularCurrencies.length>0) {
         const fetchExchangeRates = async () => {
           const response = await fetch(
             `https://api.frankfurter.app/latest?from=${basePopularCurrency}&to=${popularCurrencies}`
@@ -19,6 +20,7 @@ export default function PopularCurrencies ({ currencies}) {
           setExchangeRates(data.rates);
           }
         fetchExchangeRates();
+      }
       }, [basePopularCurrency, popularCurrencies]);
 
       const handleAddCurrency = () => {

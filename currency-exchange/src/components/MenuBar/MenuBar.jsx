@@ -9,21 +9,23 @@ export default function MenuBar() {
     }
 
     return (
-        <div className="menu-container text-red-300">
-            <h3 onClick = {toggleMenu}>Menu</h3>
-            {showMenu && (
-                <ul>
-                <li>
-                    <Link to="/mainpage">Main Page</Link>
-                </li>
-                <li>
-                    <Link to="/mywallet">My Wallet</Link>
-                </li>
-                <li>
-                    <Link to="/chartpage">Historical Charts</Link>
-                </li>
-            </ul>
-            )}
-        </div>
+        <div className="menu-position fixed top-0 right-0 p-4">
+            <div className="menu-container text-red-300">
+                <p onClick = {toggleMenu}>Menu</p>
+                {showMenu && (
+                    <ul className="absolute right-0 mt-2 bg-white border rounded-lg shadow-lg">
+                    <li>
+                        <Link to="/mainpage" className="block px-4 py-2 hover:bg-gray-100" >Main Page</Link>
+                    </li>
+                    <li>
+                        <Link to="/mywallet" className="block px-4 py-2 hover:bg-gray-100">My Wallet</Link>
+                    </li>
+                    <li>
+                        <Link to="/chartpage" className="block px-4 py-2 hover:bg-gray-100">Historical Charts</Link>
+                    </li>
+                </ul>
+                )}
+            </div>
+        </div>   
     )
 }

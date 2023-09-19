@@ -23,6 +23,7 @@ function App() {
           </Routes>
         </div>
       </section>
+      <h1>Currency Converter</h1>
     </>
   )
 }
