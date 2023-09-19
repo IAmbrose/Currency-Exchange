@@ -3,8 +3,8 @@ import Chart from "react-apexcharts"
 
 export default function ChartPage () {
 
-    const [startDate, setStartDate] = useState("")
-    const [endDate, setEndDate] = useState("")
+    const [startDate, setStartDate] = useState("2022-10-14")
+    const [endDate, setEndDate] = useState("2022-11-14")
     const [baseCurrency,setBaseCurrency] = useState("EUR")
     const [quoteCurrency, setQuoteCurrency] = useState("USD")
     const [chartData, setChartData] = useState([])

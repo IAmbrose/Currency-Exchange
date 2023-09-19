@@ -33,9 +33,14 @@ export default function PopularCurrencies ({ currencies}) {
         )
         setPopularCurrencies(updatedCurrencies)
       }
-        
+      
+      const handleBasePopularCurrencyChange = (event) => {
+        setBasePopularCurrency(event.target.value)
+      }
 
-
+      const handleNewCurrencyChange = (event) => {
+        setNewCurrency(event.target.value)
+      }
 
     return(
         <div>
@@ -43,7 +48,7 @@ export default function PopularCurrencies ({ currencies}) {
             <div>Base Currency
               <select
                 value={basePopularCurrency}
-                onChange={(event) => setBasePopularCurrency(event.target.value)}
+                onChange={handleBasePopularCurrencyChange}
                 >
                   <option value={basePopularCurrency}>{basePopularCurrency}</option>
                   {currencies.map((option) => (
@@ -64,7 +69,7 @@ export default function PopularCurrencies ({ currencies}) {
             <div>
               <select
                 value={newCurrency}
-                onChange={(event) => setNewCurrency(event.target.value)}
+                onChange={handleNewCurrencyChange}
                 >
                   <option value="">Select a currency</option>
                   {currencies.map((option) => (

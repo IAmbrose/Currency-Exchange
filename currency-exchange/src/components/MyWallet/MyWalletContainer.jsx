@@ -47,21 +47,34 @@ export default function MyWalletContainer () {
         selectedCurrency.forEach((currency) => {
           if (balances[currency] && exchangeRates[currency]) {
             total += balances[currency] / exchangeRates[currency];
-          }
+          } //dont need to use useEffect
         });
         setTotalValue(total);
       }, [selectedCurrency, balances, exchangeRates]);
 
+      const handleNewCurrencyChange = (event) => {
+        setNewCurrency(event.target.value)
+      }
 
+      const handleBaseCurrencyChange =(event) => {
+        setBaseCurrency(event.target.value)
+      }
 
     return (
         <div>
         <h1>My Wallet</h1>
         <h2>Base Currency - {baseCurrency}</h2>
+        <select value={baseCurrency} onChange={handleBaseCurrencyChange}>
+          {currencies.map(currency => (
+            <option key={currency} value={currency}>
+              {currency}
+            </option>
+          ))}
+        </select>
         <h4>Total Value in {baseCurrency}: ${totalValue.toFixed(2)}</h4>
         <select
             value={newCurrency}
-            onChange={(event) => setNewCurrency(event.target.value)}
+            onChange={handleNewCurrencyChange}
             >
                 <option value="">Select a currency</option>
                 {currencies.map((option) => (
