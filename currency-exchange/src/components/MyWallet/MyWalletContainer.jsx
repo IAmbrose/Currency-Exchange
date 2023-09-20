@@ -71,23 +71,23 @@ export default function MyWalletContainer () {
         
 
         const handleAddCurrency = async () => {
-              if (selectedCurrency && baseCurrency) {
-                const totalInBase = (depositAmount - spendAmount) / rate;
-                const total = depositAmount - spendAmount
-              await addWalletData({
-                currency: selectedCurrency,
-                rate: rate, 
-                base: baseCurrency,
-                deposit: depositAmount,
-                spend: spendAmount,
-                totalinbase: totalInBase,
-                total: total,
-              });
-              setSelectedCurrency("");
-              setDepositAmount("");
-              setSpendAmount("");
-              setRate("");
-              }
+            if (selectedCurrency && baseCurrency) {
+              const totalInBase = (depositAmount - spendAmount) / rate;
+              const total = depositAmount - spendAmount
+            await addWalletData({
+              currency: selectedCurrency,
+              rate: rate, 
+              base: baseCurrency,
+              deposit: depositAmount,
+              spend: spendAmount,
+              totalinbase: totalInBase,
+              total: total,
+            });
+            setSelectedCurrency("");
+            setDepositAmount("");
+            setSpendAmount("");
+            setRate("");
+            }
         };
         
 
@@ -177,7 +177,7 @@ export default function MyWalletContainer () {
             <MyCurrencyCard
               key={currency}
               currency={currency}
-              totalCurrencyValue={total}
+              totalCurrencyValue={total.toFixed(2)}
             />
           ))}
         </div>

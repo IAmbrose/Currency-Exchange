@@ -89,6 +89,8 @@ export default function ConverterMainPage() {
       <p>You have converted ${baseAmount}{baseCurrency} to ${quoteAmount}{quoteCurrency}.</p>
       <PopularCurrencies 
        currencies={currencies}
+       baseCurrency={baseCurrency}
+       setBaseCurrency={setBaseCurrency}
        />
       
     </>
