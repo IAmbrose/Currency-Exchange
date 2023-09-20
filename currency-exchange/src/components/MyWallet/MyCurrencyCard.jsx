@@ -1,8 +1,20 @@
+import { deleteWalletData } from "./airTableApi"
 
-export default function MyCurrencyCard ({ currency, totalCurrencyValue,}) {
+export default function MyCurrencyCard ({ currency, totalCurrencyValue }) {
+    const handleDeleteCurrency = async () => {
+        const decision = window.confirm(`Are you sure you want to delete all entries of ${currency}?`)
+        if (!decision){
+            return;          
+        }
+        await deleteWalletData ({
+            currency
+        })
+    }
+    
     return (
         <div>
-            <p>Total {currency}: {totalCurrencyValue}</p>
+            <span>Total {currency}: {totalCurrencyValue}</span>
+            <button onClick={handleDeleteCurrency}>Delete</button>
         </div>
         )
     }

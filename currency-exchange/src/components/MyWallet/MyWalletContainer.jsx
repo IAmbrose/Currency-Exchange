@@ -3,6 +3,7 @@ import {  getWalletData, addWalletData } from "./airTableApi";
 import MyCurrencyCard from "./MyCurrencyCard";
 
 
+
 export default function MyWalletContainer () {
     const [currencies, setCurrencies] = useState([])
     const [baseCurrency, setBaseCurrency] = useState("")
@@ -130,6 +131,7 @@ export default function MyWalletContainer () {
         const newTotalBaseCurrencyValue = calculateTotalBaseCurrencyValue();
         setTotalBaseCurrencyValue(newTotalBaseCurrencyValue);
       }, [totalCurrencyValue, exchangeRates, baseCurrency]);
+
       
     return (
         <div>
