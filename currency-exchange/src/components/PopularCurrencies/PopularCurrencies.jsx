@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 
 
-export default function PopularCurrencies ({ currencies}) {
+export default function PopularCurrencies ({ currencies }) {
     const [exchangeRates, setExchangeRates] = useState([]);
     const [popularCurrencies, setPopularCurrencies] = useState(["USD", "JPY", "AUD", "SGD"]) 
     const [basePopularCurrency, setBasePopularCurrency] = useState("EUR")
