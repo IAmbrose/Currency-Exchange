@@ -12,6 +12,8 @@ export default function MyWalletContainer () {
     const [rate, setRate] = useState("");
     const [walletData, setWalletData] = useState([]);
     const [totalCurrencyValue, setTotalCurrencyValue] = useState({})
+    const [exchangeRates, setExchangeRates] = useState([])
+    const [totalBaseCurrencyValue, setTotalBaseCurrencyValue] = useState(0);
 
     
 
@@ -21,8 +23,9 @@ export default function MyWalletContainer () {
         setWalletData(data);
 
         const totalValue = {};
-        data?.records?.forEach((record) => {
-          const { currency, total} = record.fields;
+        data.records.forEach((record) => {
+          const currency = record.fields.currency;
+          const total = record.fields.total;
           if (totalValue[currency]) {
             totalValue[currency] += total;
           } else {
@@ -44,12 +47,15 @@ export default function MyWalletContainer () {
           const data = await response.json();
           setCurrencies([data.base, ...Object.keys(data.rates)]);
           setBaseCurrency(data.base)
+          setExchangeRates(data.rates);
         };
         fetchCurrencies();
       }, []);
 
       useEffect(() => {
-        if (baseCurrency && selectedCurrency) {
+        if (baseCurrency === selectedCurrency) {
+          setRate(1);
+        } else if (baseCurrency && selectedCurrency) {
           const fetchExchangeRates = async () => {
             const response = await fetch(
               `https://api.frankfurter.app/latest?from=${baseCurrency}&to=${selectedCurrency}`
@@ -103,7 +109,28 @@ export default function MyWalletContainer () {
       };
 
       
-
+      useEffect(() => {
+        const calculateTotalBaseCurrencyValue = () => {
+          let totalBaseValue = 0;
+    
+          for (const [currency, total] of Object.entries(totalCurrencyValue)) {
+            if (exchangeRates[currency]) {
+              if (currency === baseCurrency) {
+                totalBaseValue += total; 
+              } else {
+                const exchangeRate = exchangeRates[currency];
+                totalBaseValue += total / exchangeRate;
+              }
+            } else {
+              totalBaseValue += total;
+            }
+          }
+          return totalBaseValue;
+        };
+        const newTotalBaseCurrencyValue = calculateTotalBaseCurrencyValue();
+        setTotalBaseCurrencyValue(newTotalBaseCurrencyValue);
+      }, [totalCurrencyValue, exchangeRates, baseCurrency]);
+      
     return (
         <div>
         <h1>My Wallet</h1>
@@ -116,7 +143,8 @@ export default function MyWalletContainer () {
           ))}
         </select>
         </div>
-        <h2>Exchange Rate: 1EUR - {rate}{selectedCurrency}</h2>
+        <h2>Total Amount in {baseCurrency} = {totalBaseCurrencyValue.toFixed(2)}</h2>
+        <h2>Exchange Rate: 1{baseCurrency} - {rate}{selectedCurrency}</h2>
         <select
             value={selectedCurrency}
             onChange={handleNewCurrencyChange}
