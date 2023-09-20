@@ -43,30 +43,5 @@ async function addWalletData({ currency, rate, base, deposit, spend, totalinbase
     }
 
 
-async function deleteWalletData({ currency, rate, base, deposit, spend, totalinbase, total }) {
-    const deleteData = {
-        fields:{
-            currency,
-            rate,
-            base,
-            deposit,
-            spend,
-            totalinbase,
-            total,
-        }
-    }
-    const response = await fetch(`${BASE_URL}/${BASE_ID}/${TABLE_ID}`, {
-        method:"DELETE",
-        headers: {
-            "Authorization": `Bearer ${API_KEY}`,
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(deleteData)
-    })
-    const data = await response.json();
-    return data;
-}
 
-
-
-export { getWalletData, addWalletData, deleteWalletData }
+export { getWalletData, addWalletData }

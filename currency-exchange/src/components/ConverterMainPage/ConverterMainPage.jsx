@@ -66,15 +66,18 @@ export default function ConverterMainPage() {
 
   return (
     <>
-      <h1>Currency Converter</h1>
-      <ConverterRow
+      <h1 className='text-blue-600 font-bold tracking-wide flex-auto text-2xl font-semibold text-slate-900'>Currency Converter</h1>
+      <div className='cursor-pointer text-blue-600/100 text-xl focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm'>
+      <ConverterRow 
         currencies = {currencies}
         selectCurrency = {baseCurrency}
         onChangeCurrency={event => setBaseCurrency(event.target.value)}
         amount = {baseAmount}
         onChangeAmount={handleBaseAmountChange}
         />
+        </div>
       <div>=</div>
+      <div className='cursor-pointer text-blue-600/100 text-xl focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm'>
       <ConverterRow 
         currencies = {currencies}
         selectCurrency = {quoteCurrency}  
@@ -82,6 +85,7 @@ export default function ConverterMainPage() {
         amount = {quoteAmount}
         onChangeAmount={handleQuoteAmountChange}
       />
+      </div>
       <p>You have converted ${baseAmount}{baseCurrency} to ${quoteAmount}{quoteCurrency}.</p>
       <PopularCurrencies 
        currencies={currencies}
