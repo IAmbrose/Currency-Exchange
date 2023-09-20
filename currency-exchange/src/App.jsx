@@ -7,9 +7,10 @@ import MyWalletContainer from './components/MyWallet/MyWalletContainer';
 import ChartPage from './components/ChartPage/ChartPage';
 
 
+
 function App() {
 
- 
+
 
   return (
     <>
@@ -23,7 +24,6 @@ function App() {
           </Routes>
         </div>
       </section>
-      <h1>Currency Converter</h1>
     </>
   )
 }

@@ -1,16 +1,41 @@
 import { useEffect, useState } from "react";
+import {  getWalletData, addWalletData } from "./airTableApi";
 import MyCurrencyCard from "./MyCurrencyCard";
 
 
 export default function MyWalletContainer () {
     const [currencies, setCurrencies] = useState([])
     const [baseCurrency, setBaseCurrency] = useState("")
-    const [selectedCurrency, setSelectedCurrency] = useState([])
-    const [newCurrency, setNewCurrency] = useState("")
-    const [exchangeRates, setExchangeRates] = useState([]);
-    const [balances, setBalances] = useState({});
-    const [totalValue, setTotalValue] = useState(0);
+    const [selectedCurrency, setSelectedCurrency] = useState("")
+    const [depositAmount, setDepositAmount] = useState("");
+    const [spendAmount, setSpendAmount] = useState("");
+    const [rate, setRate] = useState("");
+    const [walletData, setWalletData] = useState([]);
+    const [totalCurrencyValue, setTotalCurrencyValue] = useState({})
+
     
+
+    useEffect(() => {
+      const fetchData = async () => {
+        const data = await getWalletData();
+        setWalletData(data);
+
+        const totalValue = {};
+        data?.records?.forEach((record) => {
+          const { currency, total} = record.fields;
+          if (totalValue[currency]) {
+            totalValue[currency] += total;
+          } else {
+            totalValue[currency] = total;
+          }
+        });
+        setTotalCurrencyValue(totalValue);
+      };
+      fetchData();
+    }, [walletData]);
+
+
+
     useEffect(() => {
         const fetchCurrencies = async () => {
           const response = await fetch(
@@ -24,48 +49,65 @@ export default function MyWalletContainer () {
       }, []);
 
       useEffect(() => {
-        if (baseCurrency && selectedCurrency.length > 0) {
+        if (baseCurrency && selectedCurrency) {
           const fetchExchangeRates = async () => {
             const response = await fetch(
               `https://api.frankfurter.app/latest?from=${baseCurrency}&to=${selectedCurrency}`
             );
             const data = await response.json();
-            setExchangeRates(data.rates);
+            setRate(data.rates[selectedCurrency]);
             }
           fetchExchangeRates();
           }
         }, [baseCurrency, selectedCurrency]);
 
+        
 
-      const handleAddCurrency = () => {
-        if (newCurrency && !selectedCurrency.includes(newCurrency)) {
-          setSelectedCurrency([...selectedCurrency, newCurrency]);
-          setNewCurrency("")
-        }
-      }
-
-      useEffect(() => {
-        let total = 0;
-        selectedCurrency.forEach((currency) => {
-          if (balances[currency] !== undefined && exchangeRates[currency] !== undefined) {
-            total += balances[currency] / exchangeRates[currency];
-          } //dont need to use useEffect
-        });
-        setTotalValue(total);
-      }, [selectedCurrency, balances, exchangeRates]);
+        const handleAddCurrency = async () => {
+              if (selectedCurrency && baseCurrency) {
+                const totalInBase = (depositAmount - spendAmount) / rate;
+                const total = depositAmount - spendAmount
+              await addWalletData({
+                currency: selectedCurrency,
+                rate: rate, 
+                base: baseCurrency,
+                deposit: depositAmount,
+                spend: spendAmount,
+                totalinbase: totalInBase,
+                total: total,
+              });
+              setSelectedCurrency("");
+              setDepositAmount("");
+              setSpendAmount("");
+              setRate("");
+              }
+        };
+        
 
       const handleNewCurrencyChange = (event) => {
-        setNewCurrency(event.target.value)
+        setSelectedCurrency(event.target.value)
       }
 
       const handleBaseCurrencyChange =(event) => {
         setBaseCurrency(event.target.value)
       }
+      
+      const handleDepositChange = (event) => {
+        const value = event.target.value;
+        setDepositAmount(parseFloat(value));
+      };
+    
+      const handleSpendChange = (event) => {
+        const value = event.target.value;
+        setSpendAmount(parseFloat(value));
+      };
+
+      
 
     return (
         <div>
         <h1>My Wallet</h1>
-        <h2>Base Currency - {baseCurrency}</h2>
+        <div>Base Currency
         <select value={baseCurrency} onChange={handleBaseCurrencyChange}>
           {currencies.map(currency => (
             <option key={currency} value={currency}>
@@ -73,9 +115,10 @@ export default function MyWalletContainer () {
             </option>
           ))}
         </select>
-        <h4>Total Value in {baseCurrency}: ${totalValue.toFixed(2)}</h4>
+        </div>
+        <h2>Exchange Rate: 1EUR - {rate}{selectedCurrency}</h2>
         <select
-            value={newCurrency}
+            value={selectedCurrency}
             onChange={handleNewCurrencyChange}
             >
                 <option value="">Select a currency</option>
@@ -85,20 +128,27 @@ export default function MyWalletContainer () {
                 </option>
             ))}
         </select>
+        <input
+          type="number"
+          placeholder="Deposit amount"
+          value={depositAmount}
+          onChange={handleDepositChange}
+        />
+        <input
+          type="number"
+          placeholder="Spend amount"
+          value={spendAmount}
+          onChange={handleSpendChange}
+        />
         <button onClick={handleAddCurrency}>Add Currency</button>
-        <div className="wallet-container">
-            {selectedCurrency.map((currency) => (
-                <MyCurrencyCard
-                  key = {currency}
-                  currency = {currency}
-                  exchangeRates={exchangeRates}
-                  balance={balances[currency] || 0}
-                  setBalance={(newBalance) =>
-                    setBalances({ ...balances, [currency]: newBalance })
-                  }
-                  baseCurrency={baseCurrency}
-                 />
-            ))}
+        <div>
+        {Object.entries(totalCurrencyValue).map(([currency, total]) => (
+            <MyCurrencyCard
+              key={currency}
+              currency={currency}
+              totalCurrencyValue={total}
+            />
+          ))}
         </div>
     </div>
         

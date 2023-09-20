@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import ConverterRow from './ConverterRow';
 import PopularCurrencies from '../PopularCurrencies/PopularCurrencies';
-import ChartPage from '../ChartPage/ChartPage';
+
 
 
 
