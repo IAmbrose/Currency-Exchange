@@ -32,7 +32,6 @@ export default function ConverterMainPage() {
         setCurrencies([data.base, ...Object.keys(data.rates)]);
         setBaseCurrency(data.base)
         setQuoteCurrency(Object.keys(data.rates)[0])
-        setRate(data.rates[Object.keys(data.rates)[0]])
       };
       fetchCurrencies();
     }, []);
@@ -90,8 +89,6 @@ export default function ConverterMainPage() {
       <p className='font-serif text-black p-4 text-justify'>You have converted ${baseAmount}{baseCurrency} to ${quoteAmount}{quoteCurrency}.</p>
       <PopularCurrencies 
        currencies={currencies}
-       baseCurrency={baseCurrency}
-       setBaseCurrency={setBaseCurrency}
        />
       </div>
     </>
