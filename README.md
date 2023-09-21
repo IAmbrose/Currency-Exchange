@@ -47,13 +47,20 @@ You must use Airtable (but NOT the airtable client) to store data.
   in different countries. In addition, users can use the application to get a better 
   understanding of how the foreign currencies has been fluctuating via the charts.
 
-  ## Wireframe
+  ## Wireframe & Trello (Planning)
 
   ![image](https://github.com/IAmbrose/Currency-Exchange/assets/139415730/b3013c06-a65d-4e8b-94df-4c74339a91c1)
+
+  https://trello.com/invite/b/hkV1CYqU/ATTIdbbb9b6d45d0c3768d71f9b312b39e1aCB6D07A9/currency-converter-app
 
 ## Actual App (MainPage --> WalletPage --> ChartPage --> About)
 
 ![image](https://github.com/IAmbrose/Currency-Exchange/assets/139415730/15aba22e-f75b-42e4-aeca-1ba8488a5176)
+
+## Deployment
+
+The game is deployed on Vercel, and you can use it here:
+https://currency-exchange-converter.vercel.app/
 
 ## Key Challenges
 
