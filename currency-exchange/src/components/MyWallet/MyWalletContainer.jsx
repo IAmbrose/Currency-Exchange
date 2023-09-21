@@ -153,11 +153,11 @@ export default function MyWalletContainer () {
             value={selectedCurrency}
             onChange={handleNewCurrencyChange}
             >
-                <option value="">Select a currency</option>
-                {currencies.map((option) => (
-                    <option key={option} value={option}>
-                    {option}
-                </option>
+            <option value="">Select a currency</option>
+            {currencies.map((option) => (
+                <option key={option} value={option}>
+                {option}
+            </option>
             ))}
         </select>
         <br/>
