@@ -134,20 +134,22 @@ export default function MyWalletContainer () {
     
       
     return (
+      <div className="bg-teal-100 border-solid border-2 border-teal-200 rounded-lg max-w-sm">
         <div>
-        <h1>My Wallet</h1>
-        <div>Base Currency
-        <select value={baseCurrency} onChange={handleBaseCurrencyChange}>
-          {currencies.map(currency => (
-            <option key={currency} value={currency}>
-              {currency}
-            </option>
-          ))}
-        </select>
+        <h1 className="bg-teal-500 font-bold tracking-wide flex-auto text-4xl font-semibold text-slate-900 p-3">My Wallet</h1>
+        <div className="border border-gray-300 rounded-lg text-lg p-4">Base Currency
+          <select value={baseCurrency} onChange={handleBaseCurrencyChange}>
+            {currencies.map(currency => (
+              <option key={currency} value={currency}>
+                {currency}
+              </option>
+            ))}
+          </select>
         </div>
-        <h2>Total Amount in {baseCurrency} = {totalBaseCurrencyValue.toFixed(2)}</h2>
-        <h2>Exchange Rate: 1{baseCurrency} - {rate}{selectedCurrency}</h2>
-        <select
+        <h2 className="font-serif text-black p-4 text-center">Total Amount in {baseCurrency} = {totalBaseCurrencyValue.toFixed(2)}</h2>
+        <h2 className="font-serif text-black p-4 text-center">Exchange Rate: 1{baseCurrency} - {rate}{selectedCurrency}</h2>
+        <select 
+            className="cursor-pointer rounded-md border-2 border-solid border-slate-300  text-lg text-center p-3 mb-4"
             value={selectedCurrency}
             onChange={handleNewCurrencyChange}
             >
@@ -158,19 +160,24 @@ export default function MyWalletContainer () {
                 </option>
             ))}
         </select>
+        <br/>
         <input
+          className="w-60 h-8 mb-4"
           type="number"
           placeholder="Deposit amount"
           value={depositAmount}
           onChange={handleDepositChange}
         />
+        <br/>
         <input
+          className="w-60 h-8"
           type="number"
           placeholder="Spend amount"
           value={spendAmount}
           onChange={handleSpendChange}
         />
-        <button onClick={handleAddCurrency}>Add Currency</button>
+        <br/>
+        <button className="transition ease-in-out delay-150 rounded-full bg-sky-500 text-white text-lg  rounded-lg p-2" onClick={handleAddCurrency}>Add Currency</button>
         <div>
         {Object.entries(totalCurrencyValue).map(([currency, total]) => (
             <MyCurrencyCard
@@ -181,6 +188,6 @@ export default function MyWalletContainer () {
           ))}
         </div>
     </div>
-        
+  </div>     
     )
 }
