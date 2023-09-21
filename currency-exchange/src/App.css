@@ -42,5 +42,7 @@
 }
 
 body {
-  background-color: #87CEEB
+  background-image: url('https://imgur.com/kvoAWrO.png');
+  background-size: cover;
+  font-family: "serif";
 }
