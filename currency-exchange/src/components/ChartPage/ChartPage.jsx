@@ -27,7 +27,7 @@ export default function ChartPage () {
             `https://api.frankfurter.app/${startDate}..${endDate}?from=${baseCurrency}&to=${quoteCurrency}`
           );
           const data = await response.json();
-
+          
           const dates = Object.keys(data.rates);
           const rates = dates.map((date) => data.rates[date][quoteCurrency]);
 
