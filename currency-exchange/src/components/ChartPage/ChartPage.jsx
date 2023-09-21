@@ -82,8 +82,8 @@ export default function ChartPage () {
 
   
     return (
-        <div className="bg-teal-100 border-solid border-2 border-teal-200 rounded-lg max-w-sm">
-        <h1 className="bg-teal-500 font-bold tracking-wide flex-auto text-4xl font-semibold text-slate-900 p-3">Historical Exchange Rate Chart</h1>
+        <div className="bg-sky-100 border-solid border-2 border-teal-200 rounded-lg max-w-sm">
+        <h1 className="bg-blue-950 rounded-lg text-white font-bold tracking-wide flex-auto text-4xl font-semibold text-slate-900 p-3">Historical Exchange Rate Chart</h1>
         <h3 className="border border-gray-300 rounded-lg text-lg p-4">{baseCurrency} to {quoteCurrency}</h3>
         <div>
           {chartData && chartData?.series &&(

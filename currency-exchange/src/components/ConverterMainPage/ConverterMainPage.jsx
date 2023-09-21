@@ -65,8 +65,8 @@ export default function ConverterMainPage() {
 
   return (
     <>
-    <div className='bg-teal-100 border-solid border-2 border-teal-200 rounded-lg max-w-sm'>
-      <h1 className='bg-teal-500 font-bold tracking-wide flex-auto text-4xl font-semibold text-slate-900 p-3'>Currency Converter</h1>
+    <div className='bg-sky-100 border-solid border-2 border-teal-200 rounded-lg max-w-sm'>
+      <h1 className='bg-blue-950 text-white font-bold tracking-wide flex-auto text-4xl font-semibold text-slate-900 p-3 rounded-lg'>Currency Converter</h1>
       <div className='cursor-pointer text-blue-600/100 text-xl focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 p-3'>
       <ConverterRow 
         currencies = {currencies}

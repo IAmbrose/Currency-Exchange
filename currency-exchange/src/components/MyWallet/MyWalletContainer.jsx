@@ -134,9 +134,9 @@ export default function MyWalletContainer () {
     
       
     return (
-      <div className="bg-teal-100 border-solid border-2 border-teal-200 rounded-lg max-w-sm">
+      <div className="bg-sky-100 border-solid border-2 border-teal-200 rounded-lg max-w-sm">
         <div>
-        <h1 className="bg-teal-500 font-bold tracking-wide flex-auto text-4xl font-semibold text-slate-900 p-3">My Wallet</h1>
+        <h1 className="bg-blue-950 rounded-lg text-white font-bold tracking-wide flex-auto text-4xl font-semibold text-slate-900 p-3">My Wallet</h1>
         <div className="border border-gray-300 rounded-lg text-lg p-4">Base Currency
           <select value={baseCurrency} onChange={handleBaseCurrencyChange}>
             {currencies.map(currency => (
