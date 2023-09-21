@@ -33,26 +33,26 @@ export default function ChartPage () {
 
 
           setChartData({
-                options: {
-                    chart: {
-                        id: "exchange-rate-chart"
-                    },
-                    xaxis: {
-                        categories: dates 
-                    },
-                    yaxis: {
-                        title: {
-                            text: `Exchange Rate (${baseCurrency} to ${quoteCurrency})`
-                        }
-                    }
+            options: {
+                chart: {
+                    id: "exchange-rate-chart"
                 },
-                series: [
-                    {
-                        name: `${baseCurrency} to ${quoteCurrency}`,
-                        data: rates
+                xaxis: {
+                    categories: dates 
+                },
+                yaxis: {
+                    title: {
+                        text: `Exchange Rate (${baseCurrency} to ${quoteCurrency})`
                     }
-                ]
-            });
+                }
+            },
+            series: [
+                {
+                    name: `${baseCurrency} to ${quoteCurrency}`,
+                    data: rates
+                }
+            ]
+        });
 
           setStartDate(data.start_date)
           setEndDate(data.end_date)
@@ -82,56 +82,60 @@ export default function ChartPage () {
 
   
     return (
+        <div className="bg-teal-100 border-solid border-2 border-teal-200 rounded-lg max-w-sm">
+        <h1 className="bg-teal-500 font-bold tracking-wide flex-auto text-4xl font-semibold text-slate-900 p-3">Historical Exchange Rate Chart</h1>
+        <h3 className="border border-gray-300 rounded-lg text-lg p-4">{baseCurrency} to {quoteCurrency}</h3>
         <div>
-        <h1>Historical Exchange Rate Chart</h1>
-        <h3>{baseCurrency} to {quoteCurrency}</h3>
-        <div>
-            {chartData && chartData?.series &&(
-                <Chart
-                options={chartData.options}
-                series={chartData.series}
-                type="line"
-                width="100%"
-                height="400"
-                />
-            )}
+          {chartData && chartData?.series &&(
+            <Chart
+            options={chartData.options}
+            series={chartData.series}
+            type="line"
+            width="100%"
+            height="400"
+            />
+          )}
         </div>
         <label>Start Date:</label>
         <input
-            type="date"
-            onChange={handleStartDateChange}
+          className="mb-4"
+          type="date"
+          onChange={handleStartDateChange}
         />
+        <br/>
         <label>End Date:</label>
-        <input
-            type="date"
-            onChange={handleEndDateChange}
+        <input 
+          className="mb-4"
+          type="date"
+          onChange={handleEndDateChange}
         />
-        <button onClick={handleSubmit}>Change Dates</button>
+        <br/>
+        <button className="transition ease-in-out delay-150 rounded-full bg-sky-500 text-white text-lg  rounded-lg p-2 mb-4" onClick={handleSubmit}>Change Dates</button>
         <br/>
         <label>Base Currency:</label>
         <select
-                value={baseCurrency}
-                onChange={handleBaseCurrencyChange}
-                >
-                  <option value={baseCurrency}>{baseCurrency}</option>
-                  {currencies.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
+          value={baseCurrency}
+          onChange={handleBaseCurrencyChange}
+          >
+            <option value={baseCurrency}>{baseCurrency}</option>
+            {currencies.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
         <label>Quote Currency:</label>
         <select
-                value={quoteCurrency}
-                onChange={handleQuoteCurrencyChange}
-                >
-                  <option value={quoteCurrency}>{quoteCurrency}</option>
-                  {currencies.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
+          value={quoteCurrency}
+          onChange={handleQuoteCurrencyChange}
+          >
+            <option value={quoteCurrency}>{quoteCurrency}</option>
+            {currencies.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+        </select>
     </div>
     )
 }

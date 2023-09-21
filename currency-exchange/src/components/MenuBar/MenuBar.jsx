@@ -15,16 +15,16 @@ export default function MenuBar() {
                 {showMenu && (
                     <ul className="absolute right-0 mt-2 border rounded-lg shadow-lg bg-teal-50">
                     <li>
-                        <Link to="/" className="block px-4 py-2 hover:bg-teal-50" >Main Page</Link>
+                        <Link to="/" className="block px-4 py-2 hover:bg-teal-50 border-2 border-solid border-slate-300 " >Main Page</Link>
                     </li>
                     <li>
-                        <Link to="/mywallet" className="block px-4 py-2 hover:bg-teal-50">My Wallet</Link>
+                        <Link to="/mywallet" className="block px-4 py-2 hover:bg-teal-50 border-2 border-solid border-slate-300">My Wallet</Link>
                     </li>
                     <li>
-                        <Link to="/chartpage" className="block px-4 py-2 hover:bg-teal-50">Historical Charts</Link>
+                        <Link to="/chartpage" className="block px-4 py-2 hover:bg-teal-50 border-2 border-solid border-slate-300">Historical Charts</Link>
                     </li>
                     <li>
-                        <Link to="/about" className="block px-4 py-2 hover:bg-teal-50 ">About</Link>
+                        <Link to="/about" className="block px-4 py-2 hover:bg-teal-50 border-2 border-solid border-slate-300">About</Link>
                     </li>
                 </ul>
                 )}

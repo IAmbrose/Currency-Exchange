@@ -170,14 +170,14 @@ export default function MyWalletContainer () {
         />
         <br/>
         <input
-          className="w-60 h-8"
+          className="w-60 h-8 mb-4"
           type="number"
           placeholder="Spend amount"
           value={spendAmount}
           onChange={handleSpendChange}
         />
         <br/>
-        <button className="transition ease-in-out delay-150 rounded-full bg-sky-500 text-white text-lg  rounded-lg p-2" onClick={handleAddCurrency}>Add Currency</button>
+        <button className="transition ease-in-out delay-150 rounded-full bg-sky-500 text-white text-lg  rounded-lg p-2 mb-4" onClick={handleAddCurrency}>Add Currency</button>
         <div>
         {Object.entries(totalCurrencyValue).map(([currency, total]) => (
             <MyCurrencyCard
