@@ -61,7 +61,7 @@ understanding of how the foreign currencies has been fluctuating via the charts.
 ## Deployment
 
 The game is deployed on Vercel, and you can use it here:
-https://currency-exchange-converter.vercel.app/
+[Currency-Converter](https://currency-exchange-converter.vercel.app/)
 
 ## Key Challenges
 
