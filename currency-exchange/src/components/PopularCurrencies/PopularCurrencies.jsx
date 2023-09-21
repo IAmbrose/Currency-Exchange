@@ -48,7 +48,7 @@ export default function PopularCurrencies ({ currencies }) {
     return(
         <div>
             <h2 className="text-blue-600 font-bold tracking-wide flex-auto text-2xl font-semibold text-slate-900">Popular Currencies</h2>
-            <div>Base Currency
+            <div className="cursor-pointer border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-400">Base Currency
               <select
                 value={basePopularCurrency}
                 onChange={handleBasePopularCurrencyChange}
@@ -66,7 +66,7 @@ export default function PopularCurrencies ({ currencies }) {
                     <li className="text-blue-600/100 text-xl focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm" key={currency}>
                       {currency} -{" "}
                       {basePopularCurrency === currency ? "Base" : exchangeRates[currency]}
-                      <button onClick={() => handleRemoveCurrency(currency)}>Remove</button>
+                      <button className="text-sm text-red-500 ml-2 px-2 py-1 bg-transparent border border-red-500 hover:bg-red-500 hover:text-white hover:border-transparent focus:outline-none transition duration-300 ease-in-out transform hover:scale-105"onClick={() => handleRemoveCurrency(currency)}>-</button>
                     </li>
                   ))}
                 </ul>

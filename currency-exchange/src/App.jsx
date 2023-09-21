@@ -14,16 +14,18 @@ function App() {
 
   return (
     <>
+    <div>
       <MenuBar />
-      <section className="section">
+      <section>
         <div className="container">
           <Routes>
-            <Route path="/mainpage" element={<ConverterMainPage />}></Route>
+            <Route path="/" element={<ConverterMainPage />}></Route>
             <Route path="/mywallet" element={<MyWalletContainer />}></Route>
             <Route path="/chartpage" element={<ChartPage />}></Route>
           </Routes>
         </div>
       </section>
+    </div>
     </>
   )
 }

@@ -48,7 +48,7 @@ export default function MyWalletContainer () {
           const data = await response.json();
           setCurrencies([data.base, ...Object.keys(data.rates)]);
           setBaseCurrency(data.base)
-          setExchangeRates(data.rates);
+          setExchangeRates({...data.rates, [data.base]: 1});
         };
         fetchCurrencies();
       }, []);
@@ -62,7 +62,7 @@ export default function MyWalletContainer () {
               `https://api.frankfurter.app/latest?from=${baseCurrency}&to=${selectedCurrency}`
             );
             const data = await response.json();
-            setRate(data.rates[selectedCurrency]);
+            setRate(data.rates[selectedCurrency]);         
             }
           fetchExchangeRates();
           }
@@ -78,8 +78,8 @@ export default function MyWalletContainer () {
               currency: selectedCurrency,
               rate: rate, 
               base: baseCurrency,
-              deposit: depositAmount,
-              spend: spendAmount,
+              deposit: depositAmount || 0,
+              spend: spendAmount || 0,
               totalinbase: totalInBase,
               total: total,
             });
@@ -116,11 +116,10 @@ export default function MyWalletContainer () {
     
           for (const [currency, total] of Object.entries(totalCurrencyValue)) {
             if (exchangeRates[currency]) {
-              if (currency === baseCurrency) {
-                totalBaseValue += total; 
+              if (currency !== baseCurrency) {
+                totalBaseValue += (total / exchangeRates[currency]) * exchangeRates[baseCurrency];
               } else {
-                const exchangeRate = exchangeRates[currency];
-                totalBaseValue += total / exchangeRate;
+                totalBaseValue += total;
               }
             } else {
               totalBaseValue += total;
