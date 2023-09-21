@@ -47,8 +47,8 @@ export default function PopularCurrencies ({ currencies }) {
 
     return(
         <div>
-            <h2 className="text-blue-600 font-bold tracking-wide flex-auto text-2xl font-semibold text-slate-900">Popular Currencies</h2>
-            <div className="cursor-pointer border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-400">Base Currency
+            <h2 className="font-bold tracking-wide flex-auto text-3xl font-semibold text-slate-900 p-4">Popular Currencies</h2>
+            <div className="border border-gray-300 rounded-lg text-lg p-4">Base Currency
               <select
                 value={basePopularCurrency}
                 onChange={handleBasePopularCurrencyChange}
@@ -61,9 +61,9 @@ export default function PopularCurrencies ({ currencies }) {
                   ))}
                 </select>
               </div>
-                <ul className="p-10 divide-y divide-slate-300">
+                <ul className="p-10">
                   {popularCurrencies.map((currency) => (
-                    <li className="text-blue-600/100 text-xl focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm" key={currency}>
+                    <li className="border border-gray-300 rounded-lg text-lg p-4" key={currency}>
                       {currency} -{" "}
                       {basePopularCurrency === currency ? "Base" : exchangeRates[currency]}
                       <button className="text-sm text-red-500 ml-2 px-2 py-1 bg-transparent border border-red-500 hover:bg-red-500 hover:text-white hover:border-transparent focus:outline-none transition duration-300 ease-in-out transform hover:scale-105"onClick={() => handleRemoveCurrency(currency)}>-</button>
@@ -71,7 +71,7 @@ export default function PopularCurrencies ({ currencies }) {
                   ))}
                 </ul>
             <div>
-              <select className="cursor-pointer hover:border-blue-500 hover:border-solid hover:bg-white hover:text-blue-500 group w-full flex flex-col items-center justify-center rounded-md border-2 border-dashed border-slate-300 text-sm leading-6 text-slate-900 font-medium py-3hover:border-blue-500 hover:border-solid hover:bg-white hover:text-blue-500 group w-full flex flex-col items-center justify-center rounded-md border-2 border-dashed border-slate-300 text-sm leading-6 text-slate-900 font-medium py-3"
+              <select className="cursor-pointer rounded-md border-2 border-solid border-slate-300  text-lg text-center p-3"
                 value={newCurrency}
                 onChange={handleNewCurrencyChange}
                 >
@@ -82,7 +82,7 @@ export default function PopularCurrencies ({ currencies }) {
                     </option>
                   ))}
                 </select>
-                <button className="transition ease-in-out delay-150 rounded-full bg-sky-500 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg" onClick={handleAddCurrency}>Add Currency</button>
+                <button className="transition ease-in-out delay-150 rounded-full bg-sky-500 text-white text-lg  rounded-lg p-2" onClick={handleAddCurrency}>Add Currency</button>
             </div>
         </div>
     )

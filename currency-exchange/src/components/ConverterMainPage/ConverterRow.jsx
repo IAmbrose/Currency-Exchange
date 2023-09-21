@@ -4,8 +4,8 @@ export default function ConverterRow ({ currencies, selectCurrency, onChangeCurr
  
 
   return (
-    <div className="cursor-pointer">
-      <input className="cursor-pointer" type="number" value={amount} onChange={onChangeAmount}/>
+    <div>
+      <input className="w-60 h-8" type="number" value={amount} onChange={onChangeAmount}/>
       <CurrencyContainer 
         currencies = {currencies} 
         selectCurrency={selectCurrency}
