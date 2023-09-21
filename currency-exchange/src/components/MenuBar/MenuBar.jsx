@@ -23,6 +23,9 @@ export default function MenuBar() {
                     <li>
                         <Link to="/chartpage" className="block px-4 py-2 hover:bg-gray-100">Historical Charts</Link>
                     </li>
+                    <li>
+                        <Link to="/about" className="block px-4 py-2 hover:bg-gray-100">About</Link>
+                    </li>
                 </ul>
                 )}
             </div>
