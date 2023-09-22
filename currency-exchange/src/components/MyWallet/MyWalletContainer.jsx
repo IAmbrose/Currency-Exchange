@@ -118,9 +118,7 @@ export default function MyWalletContainer () {
             if (exchangeRates[currency]) {
               if (currency !== baseCurrency) {
                 totalBaseValue += (total / exchangeRates[currency]) * exchangeRates[baseCurrency];
-              } else {
-                totalBaseValue += total;
-              }
+              } 
             } else {
               totalBaseValue += total;
             }
